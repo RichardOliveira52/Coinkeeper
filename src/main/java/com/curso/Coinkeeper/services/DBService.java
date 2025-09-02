@@ -6,6 +6,7 @@ import com.curso.Coinkeeper.domains.enums.TipoConta;
 import com.curso.Coinkeeper.domains.enums.TipoLancamento;
 import com.curso.Coinkeeper.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,8 +26,11 @@ public class DBService {
     @Autowired
     private LancamentoRepository lancamentoRepo;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     public void initDB(){
-        Usuario usuario01 = new Usuario(null, "Richard", "richard@email.com", "1234");
+        Usuario usuario01 = new Usuario(null, "Richard", "richard@email.com", encoder.encode("1234"));
         Pessoa pessoa01 = new Pessoa(null, "Fornecedor ABC");
         CentroCusto centroCusto01 = new CentroCusto(null, "Manutenção");
         Banco banco01 = new Banco(null, "Banco do Brasil");
